@@ -25,7 +25,7 @@ public:
     explicit Player(std::string Name): _Name(std::move(Name)){}
 
     std::string GetName(){ return _Name; }
-    void SetEnemy(Goblin* Enemy) {
+    void SetEnemy(Player* Enemy) {
         mEnemy = Enemy;
     }
 
@@ -38,17 +38,7 @@ public:
 
 private:
     std::string _Name;
-    Goblin* mEnemy{nullptr};
-};
-
-class Goblin {
-public:
-    Goblin() = default;
-    explicit Goblin(std::string Name): _Name(std::move(Name)) {}
-
-    std::string GetName(){ return _Name; }
-private:
-    std::string _Name;
+    Player* mEnemy{nullptr};
 };
 
 void IncrememntReference(int& Number) { // Takes the reference to the integer
@@ -89,7 +79,7 @@ int main() {
 
     std::cout << "Player One is: " << PlayerOne.GetName()
         << "\nA new enemy has appeared! ";
-    Goblin Gobbo{"Gobbo"};
+    Player Gobbo{"Gobbo"};
     PlayerOne.SetEnemy(&Gobbo);
     PlayerOne.LogEnemy();
 
