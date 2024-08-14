@@ -27,9 +27,11 @@ public:
     std::string GetName(){ return _Name; }
     void SetEnemy(Player* Enemy) {
         mEnemy = Enemy;
+        std::cout << "\n" << this->GetName() << "\n";
+        std::cout << this->p_shield->_name;
     }
 
-    void LogEnemy() {
+    void LogEnemy() const {
         if(mEnemy)
             std::cout << "\nEnemy: " << mEnemy->GetName();
         else
@@ -53,22 +55,16 @@ int main() {
     {"Tom"};
     Weapon Sword;
     Shield Shield;
-    if(!PlayerOne
-    .p_weapon)
+    if(!PlayerOne.p_weapon)
         std::cout << "Unarmed";
     PlayerOne
     .p_weapon = &Sword;
-    if(PlayerOne
-    .p_weapon)
-        std::cout << "\nNOT NOW! " << PlayerOne
-        .p_weapon->_name << std::endl;
-    if(!PlayerOne
-    .p_shield)
+    if(PlayerOne.p_weapon)
+        std::cout << "\nNOT NOW! " << PlayerOne.p_weapon->_name << std::endl;
+    if(!PlayerOne.p_shield)
         std::cout << "\nNO SHIELD!!";
-    PlayerOne
-    .p_shield = &Shield;
-    if(PlayerOne
-    .p_shield)
+    PlayerOne.p_shield = &Shield;
+    if(PlayerOne.p_shield)
         std::cout << "\nNow I have one! " << PlayerOne
         .p_shield->_name << std::endl;
     std::cout << x << std::endl;
