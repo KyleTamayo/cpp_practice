@@ -1,6 +1,6 @@
-/home/kyle/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/kyle/.local/share/JetBrains/Toolbox/apps/clion/bin/ninja/linux/x64/ninja -G Ninja -S /home/kyle/CLionProjects/cpp_practice -B /home/kyle/CLionProjects/cpp_practice/cmake-build-debug
--- The C compiler identification is GNU 13.2.0
--- The CXX compiler identification is GNU 13.2.0
+/home/kyle/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" -S /home/kyle/Workspace/CLionProjects/cpp_practice -B /home/kyle/Workspace/CLionProjects/cpp_practice/cmake-build-debug
+-- The C compiler identification is GNU 14.2.1
+-- The CXX compiler identification is GNU 14.2.1
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
 -- Check for working C compiler: /usr/bin/cc - skipped
@@ -11,6 +11,6 @@
 -- Check for working CXX compiler: /usr/bin/c++ - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Configuring done (0.3s)
+-- Configuring done (0.6s)
 -- Generating done (0.0s)
--- Build files have been written to: /home/kyle/CLionProjects/cpp_practice/cmake-build-debug
+-- Build files have been written to: /home/kyle/Workspace/CLionProjects/cpp_practice/cmake-build-debug

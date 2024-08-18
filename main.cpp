@@ -1,83 +1,68 @@
 #include <iostream>
-#include <utility>
+#include <random>
 
+class Character;
 class Goblin;
-class Player;
+class Dragon;
 
-class Weapon {
+class Character {
 public:
-    std::string _name{"Iron Sword"};
-};
-
-class Shield {
-public:
-    std::string _name{"Omega Shield"};
-};
-
-class Player {
-public:
-    Weapon* p_weapon{nullptr};
-    Shield* p_shield{nullptr};
-
-    Player() {
-        _Name = "John";
-    };
-    explicit Player(std::string Name): _Name(std::move(Name)){}
-
-    std::string GetName(){ return _Name; }
-    void SetEnemy(Player* Enemy) {
-        mEnemy = Enemy;
-        std::cout << "\n" << this->GetName() << "\n";
-        std::cout << this->p_shield->_name;
+    virtual void Act(Character* Target) {
+        std::cout << "Character Acting\n";
     }
-
-    void LogEnemy() const {
-        if(mEnemy)
-            std::cout << "\nEnemy: " << mEnemy->GetName();
-        else
-            std::cout << "\nOops! No enemy!";
+    virtual void PrintDeathMessage() {
+        std::cout << mDeathMessage;
     }
-
-private:
-    std::string _Name;
-    Player* mEnemy{nullptr};
+    bool GetIsAlive() const { return mAlive; }
+    void SetIsAlive(const bool Alive) { mAlive = Alive; }
+protected:
+    bool mAlive {true};
+    std::string mDeathMessage {"Default Death"};
 };
 
-void IncrememntReference(int& Number) { // Takes the reference to the integer
-    Number++; // Increments Number
-}
-void IncrementPointer(int* Number) { // Takes a pointer to an integer
-    (*Number)++; // Dereferences pointer before incrementing
-}
-int main() {
-    int x{10};
-    Player PlayerOne
-    {"Tom"};
-    Weapon Sword;
-    Shield Shield;
-    if(!PlayerOne.p_weapon)
-        std::cout << "Unarmed";
-    PlayerOne
-    .p_weapon = &Sword;
-    if(PlayerOne.p_weapon)
-        std::cout << "\nNOT NOW! " << PlayerOne.p_weapon->_name << std::endl;
-    if(!PlayerOne.p_shield)
-        std::cout << "\nNO SHIELD!!";
-    PlayerOne.p_shield = &Shield;
-    if(PlayerOne.p_shield)
-        std::cout << "\nNow I have one! " << PlayerOne
-        .p_shield->_name << std::endl;
-    std::cout << x << std::endl;
-    IncrememntReference(x);  // Sends integer normally
-    std::cout << x << std::endl;
-    IncrementPointer(&x); // Sends reference to memory address
-    std::cout << x << std::endl;
+class Goblin : public Character {
+public:
+    void Act(Character* Target) override {
+        std::cout << "Goblin touched your butt\n";
+    }
+    void PrintDeathMessage() override {
+        std::cout << mDeathMessage;
+    }
+protected:
+    std::string mDeathMessage {"Goblin Death"};
+};
 
-    std::cout << "Player One is: " << PlayerOne.GetName()
-        << "\nA new enemy has appeared! ";
-    Player Gobbo{"Gobbo"};
-    PlayerOne.SetEnemy(&Gobbo);
-    PlayerOne.LogEnemy();
+class Dragon: public Character {
+public:
+    void Act(Character* Target) override {
+        std::cout << "Dragon touched it now!\n";
+    }
+    void PrintDeathMessage() override {
+        std::cout << mDeathMessage;
+    }
+protected:
+    std::string mDeathMessage {"Dragon Death"};
+};
 
-    return 0;
+void Battle(Character* A, Character* B) {
+    int count {0};
+    while (A->GetIsAlive() && B->GetIsAlive()) {
+        A->Act(B);
+        B->Act(A);
+        ++count;
+        if (count == 5) {
+            B->SetIsAlive(false);
+        }
+        if (A->GetIsAlive() == false)
+            A->PrintDeathMessage();
+        else if (B->GetIsAlive() == false)
+            B->PrintDeathMessage();
+
+    }
+}
+
+int main(int argc, char *argv[]) {
+    Goblin goblin;
+    Dragon dragon;
+    Battle(&goblin, &dragon);
 }
