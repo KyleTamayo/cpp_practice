@@ -1,68 +1,69 @@
 #include <iostream>
 #include <random>
+using namespace std;
 
 class Character;
 class Goblin;
 class Dragon;
 
+// Polymorphic due to virtual function
 class Character {
 public:
     virtual void Act(Character* Target) {
-        std::cout << "Character Acting\n";
+        cout << "Character Acting\n";
     }
     virtual void PrintDeathMessage() {
-        std::cout << mDeathMessage;
+        cout << mDeathMessage;
     }
     bool GetIsAlive() const { return mAlive; }
     void SetIsAlive(const bool Alive) { mAlive = Alive; }
 protected:
     bool mAlive {true};
-    std::string mDeathMessage {"Default Death"};
+    string mDeathMessage {"Default Death"};
 };
 
-class Goblin : public Character {
+class Player : public Character {
 public:
     void Act(Character* Target) override {
-        std::cout << "Goblin touched your butt\n";
+        cout << "Player touched your butt\n";
     }
     void PrintDeathMessage() override {
-        std::cout << mDeathMessage;
+        cout << mDeathMessage;
     }
 protected:
-    std::string mDeathMessage {"Goblin Death"};
+    string mDeathMessage {"Player Death"};
 };
 
 class Dragon: public Character {
 public:
     void Act(Character* Target) override {
-        std::cout << "Dragon touched it now!\n";
+        cout << "Dragon touched it now!\n";
     }
     void PrintDeathMessage() override {
-        std::cout << mDeathMessage;
+        cout << mDeathMessage;
     }
 protected:
-    std::string mDeathMessage {"Dragon Death"};
+    string mDeathMessage {"Dragon Death"};
 };
 
-void Battle(Character* A, Character* B) {
-    int count {0};
-    while (A->GetIsAlive() && B->GetIsAlive()) {
-        A->Act(B);
+void Battle(Character* A, Character* B, int action) {
+    if(action == 1) {
+        B->SetIsAlive(false);
+        B->PrintDeathMessage();
+    }
+    else if(action == 2) {
+        cout << "Work in progress";
+    }
+    else {
         B->Act(A);
-        ++count;
-        if (count == 5) {
-            B->SetIsAlive(false);
-        }
-        if (A->GetIsAlive() == false)
-            A->PrintDeathMessage();
-        else if (B->GetIsAlive() == false)
-            B->PrintDeathMessage();
-
     }
 }
 
 int main(int argc, char *argv[]) {
-    Goblin goblin;
+    Player player;
     Dragon dragon;
-    Battle(&goblin, &dragon);
+    int action;
+    cout << "[1] Attack [2] Defend\n";
+    cin >> action;
+    Battle(&player, &dragon, action);
 }
