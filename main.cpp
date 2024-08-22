@@ -9,52 +9,59 @@ class Dragon;
 // Polymorphic due to virtual function
 class Character {
 public:
-    virtual void Act(Character* Target) {
+    virtual ~Character() = default; // Virtual deconstructor
+
+    virtual void Act(Character *Target) {
         cout << "Character Acting\n";
     }
+
     virtual void PrintDeathMessage() {
         cout << mDeathMessage;
     }
+
     bool GetIsAlive() const { return mAlive; }
     void SetIsAlive(const bool Alive) { mAlive = Alive; }
+
 protected:
-    bool mAlive {true};
-    string mDeathMessage {"Default Death"};
+    bool mAlive{true};
+    string mDeathMessage{"Default Death"};
 };
 
-class Player : public Character {
+class Player final : public Character {
 public:
-    void Act(Character* Target) override {
+    void Act(Character *Target) override {
         cout << "Player touched your butt\n";
     }
+
     void PrintDeathMessage() override {
         cout << mDeathMessage;
     }
+
 protected:
-    string mDeathMessage {"Player Death"};
+    string mDeathMessage{"Player Death"};
 };
 
-class Dragon: public Character {
+class Dragon final : public Character {
 public:
-    void Act(Character* Target) override {
+    void Act(Character *Target) override {
         cout << "Dragon touched it now!\n";
     }
+
     void PrintDeathMessage() override {
         cout << mDeathMessage;
     }
+
 protected:
-    string mDeathMessage {"Dragon Death"};
+    string mDeathMessage{"Dragon Death"};
 };
 
-void Battle(Character* A, Character* B, int action) {
-    if(action == 1) {
+void Battle(Character *A, Character *B, int action) {
+    if (action == 1) {
         B->SetIsAlive(false);
         B->PrintDeathMessage();
-    }
-    else if(action == 2) {
+    } else if (action == 2) {
         cout << "Work in progress";
-    }
-    else {
+    } else {
         B->Act(A);
     }
 }
