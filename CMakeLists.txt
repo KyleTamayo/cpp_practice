@@ -8,4 +8,5 @@ add_executable(
         src/Main.cpp
         src/Player.cpp
         src/Player.hpp
+        src/Test.hpp
 )
