@@ -35,5 +35,5 @@ int main() {
     std::cout << "Size - 1, 11 Instructions: " << TestVectorOne[TestVectorOne.size() - 1]; // 11 instructions
     std::cout << "\n.back(), 6 Instructions: " << TestVectorOne.back(); // 6 instructions
     std::cout << "\nPlayer 1 Health: " << PlayerArray[0].GetHealth();
-    std::cout << "\nAuto Pointer: " << (*Pointer) - 10;
+    std::cout << "\nAuto Pointer: " << *Pointer - 10;
 }
