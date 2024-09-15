@@ -36,4 +36,13 @@ int main() {
     std::cout << "\n.back(), 6 Instructions: " << TestVectorOne.back(); // 6 instructions
     std::cout << "\nPlayer 1 Health: " << PlayerArray[0].GetHealth();
     std::cout << "\nAuto Pointer: " << *Pointer - 10;
+
+    const int *Number{new int(100)};
+    std::cout << "\nTesting new for memory allocation: " << *Number;
+    delete Number;
+    std::cout << "\nAfter deletion, location dereferenced: " << *Number;
+
+    Player Example{player};
 }
+
+

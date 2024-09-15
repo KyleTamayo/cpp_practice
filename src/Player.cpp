@@ -2,6 +2,12 @@
 // by Kyle Tamayo
 #include "Player.hpp"
 
+#include <iostream>
+
+Player::Player(const Player &Original) {
+    std::cout << "\nPlayer Copied\n";
+}
+
 int Player::GetHealth() const {
     return mHealth;
 }
