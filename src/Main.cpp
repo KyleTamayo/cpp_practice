@@ -5,16 +5,24 @@
 #include "Player.hpp"
 #include "Test.hpp"
 
+void TestFunc(const Player &player) {
+    std::cout << "Player Health from function: " << player.GetHealth() << "\n";
+}
+
+void PrintStringFunction(const std::string *Message) {
+    std::cout << *Message << "\n";
+}
+
 int main() {
     Player player;
     std::vector<size_t> TestVectorOne{6, 7, 8, 9, 10};
     std::vector<size_t> TestVectorTwo;
-    Player John;
+    constexpr Player John;
     size_t total{0};
-    const std::vector<Player> PlayerArray{John};
-    auto Pointer{std::make_unique<int>(50)};
+    const std::vector PlayerArray{John};
+    const auto Pointer{std::make_unique<int>(50)};
 
-    for (int i{1}; i <= 100; ++i)
+    for (auto i{1}; i <= 100; ++i)
         TestVectorTwo.push_back(i);
 
 
@@ -42,7 +50,18 @@ int main() {
     delete Number;
     std::cout << "\nAfter deletion, location dereferenced: " << *Number;
 
-    Player Example{player};
+    const Player Example{player};
+    TestFunc(Example);
+    constexpr int temp{10};
+    const int *CastTest{&temp};
+    const int *CastTest2{
+        const_cast<int *>(CastTest)
+    };
+    std::cout << "\nIncremented: " << *CastTest2;
+    std::cout << "\nIncremented?: " << *CastTest;
+
+    const std::string Message{"\nHi There!"};
+    PrintStringFunction(&Message);
 }
 
 
